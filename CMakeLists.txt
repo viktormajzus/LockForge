@@ -16,6 +16,7 @@ endif()
 add_executable(LockForge 
     src/main.cpp
     src/PathHandler.cpp
+    src/Hash.cpp
 )
 
 target_include_directories(LockForge PRIVATE include)

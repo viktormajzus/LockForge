@@ -7,6 +7,9 @@
     <ClCompile Include="C:\Users\victo\Desktop\maldev\LockForge\src\PathHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\victo\Desktop\maldev\LockForge\src\Hash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\victo\Desktop\maldev\LockForge\CMakeLists.txt" />
