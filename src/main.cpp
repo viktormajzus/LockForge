@@ -14,6 +14,9 @@
 
 #include "PathHandler.hpp"
 
+/// @brief This function is used to input a password without echoing it to the console.
+/// @param prompt The prompt to display to the user before they enter a password
+/// @return The password entered by the user
 std::string InputPassword(std::string_view prompt)
 {
   std::string password;
@@ -36,7 +39,7 @@ std::string InputPassword(std::string_view prompt)
   std::cin >> password;
   tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 #endif
-
+  std::cout << "\n";
   return password;
 }
 
