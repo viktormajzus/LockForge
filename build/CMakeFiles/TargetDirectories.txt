@@ -1,0 +1,3 @@
+C:/Users/victo/Desktop/maldev/LockForge/build/CMakeFiles/LockForge.dir
+C:/Users/victo/Desktop/maldev/LockForge/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/victo/Desktop/maldev/LockForge/build/CMakeFiles/ZERO_CHECK.dir
