@@ -10,6 +10,8 @@ private:
 public:
   PathHandler();
 
+  /// @brief Getter for the path
+  /// @return Path to AppData or its equivalent
   std::string GetPath()
   {
     return path;
