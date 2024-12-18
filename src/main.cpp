@@ -13,6 +13,7 @@
 #endif
 
 #include "PathHandler.hpp"
+#include "Hash.hpp"
 
 /// @brief This function is used to input a password without echoing it to the console.
 /// @param prompt The prompt to display to the user before they enter a password
@@ -20,7 +21,7 @@
 std::string InputPassword(std::string_view prompt)
 {
   std::string password;
-  std::print("{}", prompt);
+  std::cout << prompt;
 
 #if defined(_WIN32)
   HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
@@ -52,9 +53,27 @@ int main()
   std::string confirmPassword = InputPassword("Confirm password: ");
   while (password != confirmPassword)
   {
-    std::print("Passwords do not match. Please try again.\n");
+    std::cout << "Passwords do not match. Please try again.\n";
     password = InputPassword("Enter password: ");
     confirmPassword = InputPassword("Confirm password: ");
+  }
+  confirmPassword.clear();
+
+  Hash hash;
+  std::string hashedPassword = hash.hashPassword(password);
+  password.clear();
+
+  password = InputPassword("Enter password to verify: ");
+  bool verified = hash.verifyPassword(hashedPassword, password);
+  password.clear();
+
+  if (verified)
+  {
+    std::cout << "Password verified.\n";
+  }
+  else
+  {
+    std::cout << "Password not verified.\n";
   }
 
   return 0;
