@@ -14,7 +14,7 @@ public:
   /// @brief A function that hashed the password
   /// @param password A string_view containing the password to hash, no max length for now
   /// @return Returns the hashed password as a string
-  std::string hashPassword(std::string_view password) const;
+  static std::string hashPassword(std::string_view password, const std::vector<std::byte> &salt);
 
   /// @brief A function used to verify whether the hashed password and the password match
   /// @param hashedPassword Hashed password
@@ -22,9 +22,10 @@ public:
   /// @return True if the passwords match, false otherwise
   bool verifyPassword(const std::string_view hashedPassword, std::string_view password) const;
 
-private:
   /// @brief Generates a random salt of size length
   /// @param length Salt size in bytes
   /// @return A vector of bytes containing the salt
-  std::vector<std::byte> generateSalt(size_t length) const;
+  static std::vector<std::byte> generateSalt(size_t length);
+
+  std::vector<std::byte> simpleHash(std::string_view plaintext, const std::vector<std::byte> &salt) const;
 };

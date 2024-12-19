@@ -9,8 +9,12 @@
 class Crypt
 {
 public:
-  static std::pair<std::vector<std::byte>, std::vector<std::byte>> deriveKeys();
+  static std::pair<std::vector<std::byte>, std::vector<std::byte>> deriveKeys(const std::vector<std::byte> &hashePassword);
   static std::vector<std::byte> calculateHMAC(const std::vector<std::byte> &data, const std::vector<std::byte> &hmacKey);
   static std::vector<std::byte> encryptData(std::string_view plaintext, const std::vector<std::byte> &key, std::vector<std::byte> &iv);
+  static std::vector<std::byte> encryptData(std::string_view plaintext, const std::vector<std::byte> &key);
   static std::string decryptData(const std::vector<std::byte> &ciphertext, const std::vector<std::byte> &key, const std::vector<std::byte> &iv);
+  static std::vector<std::byte> encryptServiceName(std::string_view serviceName, const std::vector<std::byte> &key);
+  static std::vector<std::byte> encryptCredentials(std::string_view plaintext, const std::vector<std::byte> &key, std::vector<std::byte> &iv);
+  static std::vector<std::byte> deriveCheckValue(std::string_view password, const std::vector<std::byte> &salt);
 };

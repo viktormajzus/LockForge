@@ -1,4 +1,5 @@
 {
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
   "files.associations": {
     "stdexcept": "cpp",
     "array": "cpp",
@@ -57,6 +58,8 @@
     "text_encoding": "cpp",
     "cinttypes": "cpp",
     "typeinfo": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "complex": "cpp",
+    "cstring": "cpp"
   }
 }

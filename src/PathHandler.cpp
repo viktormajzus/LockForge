@@ -20,11 +20,11 @@ PathHandler::PathHandler()
 
 #elif defined(__linux__)
   const char *xdgDataHome = std::getenv("XDG_DATA_HOME");
-  path = xdgDataHome ? std::string(xdgDataHome) + "/PasswordManager/" : std::string(getenv("HOME")) + "/.local/share/PasswordManager/";
+  path = xdgDataHome ? std::string(xdgDataHome) + "/LockForge/" : std::string(getenv("HOME")) + "/.local/share/LockForge/";
   mkdir(path.c_str(), 0700);
 #elif defined(__APPLE__)
   const char *homePath = std::getenv("HOME");
-  path = std::string(homePath) + "/Library/Application Support/PasswordManager/";
+  path = std::string(homePath) + "/Library/Application Support/LockForge/";
   mkdir(path.c_str(), 0700);
 #else
   throw std::runtime_error("Unsupported platform.");

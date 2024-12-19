@@ -7,7 +7,7 @@ Hash::Hash()
 {
 }
 
-std::string Hash::hashPassword(std::string_view password) const
+std::string Hash::hashPassword(std::string_view password, const std::vector<std::byte> &salt)
 {
   const int hashLength{32};
   const int encodedLength{128};
@@ -17,13 +17,11 @@ std::string Hash::hashPassword(std::string_view password) const
   const uint32_t memoryCost{65536};
   const uint32_t parallelism{1};
 
-  std::vector<std::byte> salt = generateSalt(16);
-
   int result{};
   result = argon2i_hash_encoded(
       timeCost, memoryCost, parallelism,
       password.data(), password.size(),
-      reinterpret_cast<char *>(salt.data()), salt.size(),
+      reinterpret_cast<const char *>(salt.data()), salt.size(),
       hashLength, reinterpret_cast<char *>(hashEncoded.data()),
       hashEncoded.size());
 
@@ -45,7 +43,7 @@ bool Hash::verifyPassword(const std::string_view hashedPassword, std::string_vie
   return result == ARGON2_OK;
 }
 
-std::vector<std::byte> Hash::generateSalt(size_t length) const
+std::vector<std::byte> Hash::generateSalt(size_t length)
 {
   std::vector<std::byte> salt(length);
   std::random_device rd;
@@ -58,4 +56,11 @@ std::vector<std::byte> Hash::generateSalt(size_t length) const
   }
 
   return salt;
+}
+
+std::vector<std::byte> Hash::simpleHash(std::string_view plaintext, const std::vector<std::byte> &salt) const
+{
+  std::vector<std::byte> hash(32);
+  argon2i_hash_raw(3, 65536, 1, plaintext.data(), plaintext.size(), salt.data(), salt.size(), hash.data(), hash.size());
+  return hash;
 }
