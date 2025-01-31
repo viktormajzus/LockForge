@@ -12,6 +12,7 @@
 #include <unistd.h>
 #endif
 
+#include "CommandHandler.hpp"
 #include "PathHandler.hpp"
 #include "Hash.hpp"
 
@@ -44,8 +45,15 @@ std::string InputPassword(std::string_view prompt)
   return password;
 }
 
-int main()
+int main(int argc, char** argv)
 {
+  if (argc > 1)
+  {
+    CommandHandler commandHandler = CommandHandler(argc - 1, argv + 1);
+    commandHandler.handle();
+    return 0;
+  }
+
   PathHandler pathHandler = PathHandler();
   std::string path = pathHandler.GetPath();
 
