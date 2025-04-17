@@ -1,0 +1,7 @@
+{
+  "name": "lockforge",
+  "version-string": "0.1.0",
+  "dependencies": [
+    "botan"
+  ]
+}

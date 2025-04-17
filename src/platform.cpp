@@ -20,3 +20,11 @@ std::expected<std::filesystem::path, Error::Type> file::getDefaultPath()
   return fs::path(home) / ".lockforge" / "vault.lf";
 #endif
 }
+
+void mem::wipeStr(std::string& str)
+{
+  std::fill(str.begin(), str.end(), 0);
+  volatile char* p{ &str[0] };
+  for (std::size_t i{ 0 }; i < str.size(); ++i)
+    p[i] = 0;
+}

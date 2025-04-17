@@ -1,8 +1,39 @@
-#include <lockforge/Vault.h>
+#include <fstream>
+#include <filesystem>
+#include <expected>
 
-std::expected<void, Error::Type> Vault::open(std::string_view filePath, std::string_view masterPassword, bool exists)
+#include <lockforge/Vault.h>
+#include <lockforge/platform.hpp>
+#include <lockforge/Crypto.hpp>
+
+std::expected<void, Error::Type> Vault::open(std::string masterPassword)
 {
-  return std::expected<void, Error::Type>();
+  auto defaultPath{ file::getDefaultPath() };
+  if (!defaultPath)
+    return std::unexpected(defaultPath.error());
+
+  m_filePath = std::move(defaultPath.value());
+
+  if (std::filesystem::exists(m_filePath))
+  {
+    auto result{ loadFile() };
+    if (!result) return result;
+  } else
+  {
+    m_salt = crypto::generateSalt();
+    auto result{ saveFile() };
+    if (!result) return result;
+  }
+
+  auto key{ crypto::deriveKey(masterPassword, m_salt) };
+  mem::wipeStr(masterPassword);
+
+  if (!key)
+    return std::unexpected(key.error());
+
+  m_key = std::move(key.value());
+
+  return {};
 }
 
 std::expected<void, Error::Type> Vault::close()

@@ -6,6 +6,7 @@
 #include <array>
 #include <string>
 #include <string_view>
+#include <filesystem>
 
 #include <expected>
 
@@ -15,13 +16,13 @@
 class Vault
 {
 private:
-  std::unordered_map<std::string, Credential> credentials{};
-  std::string masterKey{};
-  std::array<std::uint8_t, 32> salt{};
-  std::string filePath{};
+  std::unordered_map<std::string, Credential> m_credentials{};
+  std::array<std::uint8_t, 32> m_key{};
+  std::array<std::uint8_t, 32> m_salt{};
+  std::filesystem::path m_filePath{};
 
 public:
-  std::expected<void, Error::Type> open(std::string_view filePath, std::string_view masterPassword, bool exists);
+  std::expected<void, Error::Type> open(std::string masterPassword);
   std::expected<void, Error::Type> close();
   std::expected<void, Error::Type> wipe();
 

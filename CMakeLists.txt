@@ -30,6 +30,9 @@ target_sources(LockForge PRIVATE ${HEADERS})
 
 target_include_directories(LockForge PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
+find_package(Botan REQUIRED)
+target_link_libraries(LockForge PRIVATE Botan::Botan)
+
 # Compiler warnings
 if (MSVC)
   target_compile_options(LockForge PRIVATE /W4 /permissive-)

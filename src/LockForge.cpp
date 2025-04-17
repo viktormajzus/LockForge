@@ -1,7 +1,8 @@
 ﻿#include <iostream>
+#include <botan/version.h>
 
 int main()
 {
-	std::cout << "Hello CMake.\n";
+	std::cout << Botan::version_string() << "\n";
 	return 0;
 }

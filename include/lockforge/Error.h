@@ -13,6 +13,7 @@ namespace Error
     ServiceNotFound,
     DuplicateEntry,
     EnvMissing,
+    Unknown,
     max_errors
   };
 
@@ -28,6 +29,7 @@ namespace Error
     case Type::ServiceNotFound: return "Target service not found";
     case Type::DuplicateEntry: return "This entry alread exists";
     case Type::EnvMissing: return "Missing enivornment path";
+    case Type::Unknown: return "Unknown error";
     default: return "Unknown error";
     }
   }
