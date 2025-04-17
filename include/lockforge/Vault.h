@@ -7,18 +7,10 @@
 #include <string>
 #include <string_view>
 
-#include <chrono>
 #include <expected>
 
 #include <lockforge/Error.h>
-
-struct Credential
-{
-  std::string service{};
-  std::string username{};
-  std::string password{};
-  std::chrono::year_month_day dateCreated{};
-};
+#include <lockforge/Credential.h>
 
 class Vault
 {
