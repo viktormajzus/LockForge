@@ -46,7 +46,7 @@ std::expected<std::array<std::uint8_t, crypto::KEY_SIZE>, Error::Type> crypto::d
       salt.size()
     );
   }
-  catch (...)
+  catch (const Botan::Exception&)
   {
     return std::unexpected(Error::Type::DecryptionFailed);
   }
